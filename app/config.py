@@ -7,31 +7,31 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class DefaultConfig:
     DEBUG = False
     ENV = "prod"  # leave this
-    URL = os.environ.get("BASE_URL", "https://suite.staffjoy.com")
+    URL = os.environ.get("BASE_URL", "https://staff.tryhabitat.com")
 
     # Toggle this if you don't want randoms from the internet creating companies
-    ALLOW_COMPANY_SIGNUPS = True
+    ALLOW_COMPANY_SIGNUPS = False
 
     MANDRILL_API_KEY = os.environ.get("MANDRILL_API_KEY")
-    FROM_EMAIL = os.environ.get("FROM_EMAIL")
+    FROM_EMAIL = os.environ.get("staffing@tryhabitat.com")
 
-    RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY")
-    RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY")
+    RECAPTCHA_PUBLIC_KEY = os.environ.get("6LczNxcUAAAAADO69GpHfSRq4SzdckcI2ZUVSveY")
+    RECAPTCHA_PRIVATE_KEY = os.environ.get("6LczNxcUAAAAAOQsALw0LrtYQnythHtvX1Tf")
     RECAPTCHA_USE_SSL = True
 
     # Redis - mostly from defaults
-    REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
+    REDIS_HOST = os.environ.get("REDIS_HOST", "staffing-001.rqwt7c.0001.usw2.cache.amazonaws.com")
     REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
     REDIS_DATABASE = os.environ.get("REDIS_DATABASE", 0)
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("mysql://habitat_mike:Mpasz1992@staffing.cr69e6u1huws.us-west-2.rds.amazonaws.com:3306/habitat")
 
-    SECRET_KEY = os.environ.get("SECRET_KEY")
+    SECRET_KEY = os.environ.get("as98d7fna09asdu0fn9as9d87fnasdoiun")
 
     # Link to job application form
-    CAREER_APPLICATION_URL = "https://staffjoy.com"
+    CAREER_APPLICATION_URL = "https://tryhabitat.com"
 
-    # Incident Tracking (optional) 
+    # Incident Tracking (optional)
     STATUS_PAGE_ID = os.environ.get("STATUS_PAGE_ID")
     STATUS_PAGE_API_KEY = os.environ.get("STATUS_PAGE_API_KEY")
 
@@ -44,15 +44,15 @@ class DefaultConfig:
     # Logging
     LOG_LEVEL = logging.INFO
     PAPERTRAIL = os.environ.get(
-        "PAPERTRAIL")  # e.g. "logs.papertrailapp.com:1234"
+        "logs5.papertrailapp.com:19086")  # e.g. "logs.papertrailapp.com:1234"
 
     # Twilio
-    TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
-    TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
+    TWILIO_ACCOUNT_SID = os.environ.get("ACa546052edcae5ae41ba1e2931b4754f3")
+    TWILIO_AUTH_TOKEN = os.environ.get("39a1d4df7d98776ab7ee44d8239db778")
     TWILIO_NUMBER = {
         # Country code to number. At least one is necessary that matches DEFAULT_COUNTRY_CODE in constants.py
-        # e.g. 
-        "1": "1234567890",
+        # e.g.
+        "1": "15705261709",
     }
 
     #
