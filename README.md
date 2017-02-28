@@ -290,7 +290,8 @@ This is not a perfect copy of our internal repo. For ease of use, sanity, and se
 * Add name and optional description
 * Back to main EB page, should see new empty application > Create One Now
 * Create web server > 
-   - Got caught with project type...
+   - Think I'm creating the application source bundle wron...
+        - For Both Generic > Multi-container & preconfigured docker (python) methods, I (tried zipping from inside the directory and the zip > WAR methods here)[http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html#using-features.deployment.source.gui]
    - I tried Generic > Multi-container docker first 
        - err on launch: 
        ```
@@ -300,6 +301,24 @@ This is not a perfect copy of our internal repo. For ease of use, sanity, and se
 2017-02-28 14:33:39 UTC-0500	ERROR	Stack named 'awseb-e-kujvbrbkak-stack' aborted operation. Current state: 'CREATE_FAILED' Reason: The following resource(s) failed to create: [AWSEBInstanceLaunchWaitCondition].
        2017-02-28 14:11:44 UTC-0500	ERROR	No ecs task definition (or empty definition file) found in environment
 ```        
+    - Next tried Preconfigured Docker (python)
+        - err on launch:
+        ```
+        2017-02-28 15:46:54 UTC-0500	WARN	Environment health has transitioned from Degraded to Severe. Command failed on all instances. ELB health is failing or not available for all instances.
+2017-02-28 15:45:54 UTC-0500	WARN	Environment health has transitioned from Info to Degraded. Command failed on all instances. Initialization completed 62 seconds ago and took 17 minutes.
+2017-02-28 15:45:43 UTC-0500	ERROR	Create environment operation is complete, but with errors. For more information, see troubleshooting documentation.
+2017-02-28 15:44:54 UTC-0500	INFO	Environment health has transitioned from Severe to Info. Initialization in progress on 1 instance. 0 out of 1 instance completed (running for 17 minutes).
+2017-02-28 15:44:40 UTC-0500	INFO	Command execution completed on all instances. Summary: [Successful: 0, Failed: 1].
+2017-02-28 15:44:40 UTC-0500	ERROR	[Instance: i-0783606e4c824d3b2] Command failed on instance. Return code: 1 Output: Invalid runtime Docker image. Expecting: amazon/aws-eb-python:3.4.2-onbuild-3.5.1, was: ubuntu:14.04. Abort deployment. Hook /opt/elasticbeanstalk/hooks/appdeploy/pre/020install_runtime_dockerfile.sh failed. For more detail, check /var/log/eb-activity.log using console or EB CLI.
+2017-02-28 15:44:38 UTC-0500	ERROR	Invalid runtime Docker image. Expecting: amazon/aws-eb-python:3.4.2-onbuild-3.5.1, was: ubuntu:14.04. Abort deployment.
+2017-02-28 15:43:54 UTC-0500	INFO	Added instance [i-0783606e4c824d3b2] to your environment.
+2017-02-28 15:42:54 UTC-0500	INFO	Removed instance [i-07fe78b37d89b4d63] from your environment.
+2017-02-28 15:39:54 UTC-0500	WARN	Environment health has transitioned from Pending to Severe. Initialization in progress (running for 12 minutes). None of the instances are sending data. ELB health is failing or not available for all instances.
+2017-02-28 15:30:54 UTC-0500	INFO	Added instance [i-07fe78b37d89b4d63] to your environment.
+        ```
+
+
+
  - Application version
      - Upload source (zip contents of repo per this repo)[http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html#using-features.deployment.source.gui]
      - Deployment preferences
