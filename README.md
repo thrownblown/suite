@@ -315,3 +315,7 @@ This is not a perfect copy of our internal repo. For ease of use, sanity, and se
       - Permission:
         - Create new service role (default)
    - Launch Environment
+
+Known Issues: 
+    - On launch logs:
+    ```No ecs task definition (or empty definition file) found in environment```
