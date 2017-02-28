@@ -299,10 +299,7 @@ This is not a perfect copy of our internal repo. For ease of use, sanity, and se
 2017-02-28 14:33:39 UTC-0500	ERROR	LaunchWaitCondition failed. The expected number of EC2 instances were not initialized within the given time. Rebuild the environment. If this persists, contact support.
 2017-02-28 14:33:39 UTC-0500	ERROR	Stack named 'awseb-e-kujvbrbkak-stack' aborted operation. Current state: 'CREATE_FAILED' Reason: The following resource(s) failed to create: [AWSEBInstanceLaunchWaitCondition].
        2017-02-28 14:11:44 UTC-0500	ERROR	No ecs task definition (or empty definition file) found in environment
-```
-   - Next tried Preconfigured Docker > Python
-        -
-        
+```        
  - Application version
      - Upload source (zip contents of repo per this repo)[http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html#using-features.deployment.source.gui]
      - Deployment preferences
