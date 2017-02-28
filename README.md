@@ -290,45 +290,9 @@ This is not a perfect copy of our internal repo. For ease of use, sanity, and se
 * Add name and optional description
 * Back to main EB page, should see new empty application > Create One Now
 * Create web server > 
-   - Think I'm creating the application source bundle wrong. Tried the following per various bundle methods (here)[http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html#using-features.deployment.source.gui]
-        -  Generic > Multi-container (zip) 🔴
-        -  Generic > Multi-container (war) 
-        -  Preconfig docker python (war) 🔴
-        -  Preconfig docker python (zip)🔴
-   - Narrowed down to container type, dockerfile looking for ubuntu, not python...think a generic war is the move 
-   ```
-   Command failed on instance. Return code: 1 Output: Invalid runtime Docker image. Expecting: amazon/aws-eb-python:3.4.2-onbuild-3.5.1, was: ubuntu:14.04. 
-   ```
-   
-   - I tried Generic > Multi-container docker first 
-       - err on launch: 
-       ```
-       2017-02-28 14:40:39 UTC-0500	WARN	Environment health has transitioned from Severe to Degraded. Command failed on all instances. Initialization in progress. 1 out of 1 instance completed (running for 35 minutes). 100.0 % of the requests to the ELB are failing with HTTP 5xx (11 minutes ago).
-2017-02-28 14:33:41 UTC-0500	INFO	Launched environment: habitatStaffing-env. However, there were issues during launch. See event log for details.
-2017-02-28 14:33:39 UTC-0500	ERROR	LaunchWaitCondition failed. The expected number of EC2 instances were not initialized within the given time. Rebuild the environment. If this persists, contact support.
-2017-02-28 14:33:39 UTC-0500	ERROR	Stack named 'awseb-e-kujvbrbkak-stack' aborted operation. Current state: 'CREATE_FAILED' Reason: The following resource(s) failed to create: [AWSEBInstanceLaunchWaitCondition].
-       2017-02-28 14:11:44 UTC-0500	ERROR	No ecs task definition (or empty definition file) found in environment
-```        
-    - Next tried Preconfigured Docker (python)
-        - err on launch:
-        ```
-        2017-02-28 15:46:54 UTC-0500	WARN	Environment health has transitioned from Degraded to Severe. Command failed on all instances. ELB health is failing or not available for all instances.
-2017-02-28 15:45:54 UTC-0500	WARN	Environment health has transitioned from Info to Degraded. Command failed on all instances. Initialization completed 62 seconds ago and took 17 minutes.
-2017-02-28 15:45:43 UTC-0500	ERROR	Create environment operation is complete, but with errors. For more information, see troubleshooting documentation.
-2017-02-28 15:44:54 UTC-0500	INFO	Environment health has transitioned from Severe to Info. Initialization in progress on 1 instance. 0 out of 1 instance completed (running for 17 minutes).
-2017-02-28 15:44:40 UTC-0500	INFO	Command execution completed on all instances. Summary: [Successful: 0, Failed: 1].
-2017-02-28 15:44:40 UTC-0500	ERROR	[Instance: i-0783606e4c824d3b2] Command failed on instance. Return code: 1 Output: Invalid runtime Docker image. Expecting: amazon/aws-eb-python:3.4.2-onbuild-3.5.1, was: ubuntu:14.04. Abort deployment. Hook /opt/elasticbeanstalk/hooks/appdeploy/pre/020install_runtime_dockerfile.sh failed. For more detail, check /var/log/eb-activity.log using console or EB CLI.
-2017-02-28 15:44:38 UTC-0500	ERROR	Invalid runtime Docker image. Expecting: amazon/aws-eb-python:3.4.2-onbuild-3.5.1, was: ubuntu:14.04. Abort deployment.
-2017-02-28 15:43:54 UTC-0500	INFO	Added instance [i-0783606e4c824d3b2] to your environment.
-2017-02-28 15:42:54 UTC-0500	INFO	Removed instance [i-07fe78b37d89b4d63] from your environment.
-2017-02-28 15:39:54 UTC-0500	WARN	Environment health has transitioned from Pending to Severe. Initialization in progress (running for 12 minutes). None of the instances are sending data. ELB health is failing or not available for all instances.
-2017-02-28 15:30:54 UTC-0500	INFO	Added instance [i-07fe78b37d89b4d63] to your environment.
-        ```
-
-
-
+        -  Generic > Multi-container (war) ✅
  - Application version
-     - Upload source (zip contents of repo per (docs)[https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html?icmpid=docs_elasticbeanstalk_console])
+     - Upload source (zip/war contents of repo (using command line)[https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html?icmpid=docs_elasticbeanstalk_console])
      - Deployment preferences
         - Policy: Rolling
         - Healthy threshold: Ok
