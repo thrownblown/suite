@@ -320,7 +320,7 @@ This is not a perfect copy of our internal repo. For ease of use, sanity, and se
 
 
  - Application version
-     - Upload source (zip contents of repo per this repo)[http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html#using-features.deployment.source.gui]
+     - Upload source (zip contents of repo per (docs)[https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html?icmpid=docs_elasticbeanstalk_console])
      - Deployment preferences
         - Policy: Rolling
         - Healthy threshold: Ok
