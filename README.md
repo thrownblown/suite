@@ -290,8 +290,16 @@ This is not a perfect copy of our internal repo. For ease of use, sanity, and se
 * Add name and optional description
 * Back to main EB page, should see new empty application > Create One Now
 * Create web server > 
-   - Think I'm creating the application source bundle wron...
-        - For Both Generic > Multi-container & preconfigured docker (python) methods, I (tried zipping from inside the directory and the zip > WAR methods here)[http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html#using-features.deployment.source.gui]
+   - Think I'm creating the application source bundle wrong. Tried the following per various bundle methods (here)[http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html#using-features.deployment.source.gui]
+        -  Generic > Multi-container (zip) 🔴
+        -  Generic > Multi-container (war) 
+        -  Preconfig docker python (war) 🔴
+        -  Preconfig docker python (zip)🔴
+   - Narrowed down to container type, dockerfile looking for ubuntu, not python...think a generic war is the move 
+   ```
+   Command failed on instance. Return code: 1 Output: Invalid runtime Docker image. Expecting: amazon/aws-eb-python:3.4.2-onbuild-3.5.1, was: ubuntu:14.04. 
+   ```
+   
    - I tried Generic > Multi-container docker first 
        - err on launch: 
        ```
