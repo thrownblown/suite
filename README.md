@@ -282,3 +282,48 @@ This is not a perfect copy of our internal repo. For ease of use, sanity, and se
 * The development environment works, but really needs a ground-up rewrite to something like Docker Compose. (It hasn't been extensively modified since before Staffjoy was a full-time job!)
 * The tests use `current_app` rather than the generator `create_app`. This should be corrected.
 * The session management system, when reading a session from a cookie, recreates the session. This means that the list of active sessions is longer than expected (though still secure).
+
+
+## Guides
+# Production 
+* Log into AWS console > Elastic Beanstalk > Create New Application
+* Add name and optional description
+* Back to main EB page, should see new empty application > Create One Now
+* Create web server > 
+   - Got caught with project type...
+   - I tried Generic > Multi-container docker first 
+       - err on launch: 
+       ```
+       2017-02-28 14:40:39 UTC-0500	WARN	Environment health has transitioned from Severe to Degraded. Command failed on all instances. Initialization in progress. 1 out of 1 instance completed (running for 35 minutes). 100.0 % of the requests to the ELB are failing with HTTP 5xx (11 minutes ago).
+2017-02-28 14:33:41 UTC-0500	INFO	Launched environment: habitatStaffing-env. However, there were issues during launch. See event log for details.
+2017-02-28 14:33:39 UTC-0500	ERROR	LaunchWaitCondition failed. The expected number of EC2 instances were not initialized within the given time. Rebuild the environment. If this persists, contact support.
+2017-02-28 14:33:39 UTC-0500	ERROR	Stack named 'awseb-e-kujvbrbkak-stack' aborted operation. Current state: 'CREATE_FAILED' Reason: The following resource(s) failed to create: [AWSEBInstanceLaunchWaitCondition].
+       2017-02-28 14:11:44 UTC-0500	ERROR	No ecs task definition (or empty definition file) found in environment
+```
+   - Next tried Preconfigured Docker > Python
+        -
+        
+ - Application version
+     - Upload source (zip contents of repo per this repo)[http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html#using-features.deployment.source.gui]
+     - Deployment preferences
+        - Policy: Rolling
+        - Healthy threshold: Ok
+        - Ignore health check: false
+        - Batch size: Fixed - 1 (Don't need multiple containers atm)
+     - Environment Info
+        - Hit button to check that availability is OK
+     - Addtl Resourcers
+        - Create an RDS DB instance
+     - Configuration Details
+        - Instance type: Picked t1.micro but whatever fits need works
+        - Skipped EC2 keys
+        - Health check URL: /health
+        - Rolling updates type: Rolling based on Health
+        - Everything else default
+      - Environment tags
+        - Left empty
+      - RDS Config:
+        - Enter db username and pass
+      - Permission:
+        - Create new service role (default)
+   - Launch Environment
