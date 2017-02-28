@@ -42,7 +42,7 @@ nosetests.xml
 # Virtual environment
 venv
 
-# boto config 
+# boto config
 .boto
 
 # development api key file
@@ -64,6 +64,7 @@ npm-debug.log
 
 data.sqlite
 user.txt
+app/config.py
 
 app/static/compiled/*
 app/static/.webassets-cache/*
