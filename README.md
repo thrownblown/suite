@@ -282,3 +282,40 @@ This is not a perfect copy of our internal repo. For ease of use, sanity, and se
 * The development environment works, but really needs a ground-up rewrite to something like Docker Compose. (It hasn't been extensively modified since before Staffjoy was a full-time job!)
 * The tests use `current_app` rather than the generator `create_app`. This should be corrected.
 * The session management system, when reading a session from a cookie, recreates the session. This means that the list of active sessions is longer than expected (though still secure).
+
+
+## Guides
+# Production 
+* Log into AWS console > Elastic Beanstalk > Create New Application
+* Add name and optional description
+* Back to main EB page, should see new empty application > Create One Now
+* Create web server > 
+        -  Generic > Multi-container (war) ✅
+ - Application version
+     - Upload source (zip/war contents of repo (using command line)[https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html?icmpid=docs_elasticbeanstalk_console])
+     - Deployment preferences
+        - Policy: Rolling
+        - Healthy threshold: Ok
+        - Ignore health check: false
+        - Batch size: Fixed - 1 (Don't need multiple containers atm)
+     - Environment Info
+        - Hit button to check that availability is OK
+     - Addtl Resourcers
+        - Create an RDS DB instance
+     - Configuration Details
+        - Instance type: Picked t1.micro but whatever fits need works
+        - Skipped EC2 keys
+        - Health check URL: /health
+        - Rolling updates type: Rolling based on Health
+        - Everything else default
+      - Environment tags
+        - Left empty
+      - RDS Config:
+        - Enter db username and pass
+      - Permission:
+        - Create new service role (default)
+   - Launch Environment
+
+Known Issues: 
+    - On launch logs:
+    ```No ecs task definition (or empty definition file) found in environment```
